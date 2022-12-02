@@ -6,9 +6,14 @@ namespace sesh\formsapi\elements;
 
 class Dropdown
 {
-    public function __construct(private string $text, private array $opts, private ?int $selected = null)
+    public function __construct(public string $text, private array $opts, private ?int $selected = null)
     {
 
+    }
+
+    public function getOpts()
+    {
+        return $this->opts;
     }
 
     public function setSelected(int $s)
@@ -19,7 +24,7 @@ class Dropdown
 
     public function getSelected()
     {
-        return $this->opts[$this->selected];
+        return $this->selected === null ? null : $this->opts[$this->selected];
     }
 
     public function getSelectedIndex()
@@ -31,7 +36,7 @@ class Dropdown
     {
         $a = ["type" => "dropdown", "text" => $this->text, "options" => $this->opts];
 
-        if ($this->selected != null)
+        if ($this->selected !== null)
             $a["default"] = $this->selected;
 
         return $a;

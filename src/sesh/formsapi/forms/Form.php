@@ -8,11 +8,16 @@ use pocketmine\form\Form as IForm;
 use pocketmine\player\Player;
 use sesh\formsapi\elements\Dropdown;
 use sesh\formsapi\elements\Input;
+use sesh\formsapi\elements\Slider;
+use sesh\formsapi\elements\StepSlider;
 use sesh\formsapi\elements\Toggle;
 
 
 abstract class Form implements IForm
 {
+    public const MODAL_TYPE = "modal";
+    public const CUSTOM_TYPE = "custom_form";
+    public const SIMPLE_TYPE = "form";
 
     protected $data = [];
 
@@ -97,6 +102,12 @@ abstract class Form implements IForm
                         break;
                     case $element instanceof Toggle:
                         $element->setToggled($e);
+                        break;
+                    case $element instanceof StepSlider:
+                        $element->setSelected($e);
+                        break;
+                    case $element instanceof Slider:
+                        $element->setCurrent($e);
                         break;
                     default:
                         break;

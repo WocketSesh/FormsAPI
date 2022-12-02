@@ -16,7 +16,7 @@ class SimpleForm extends Form
     private ? Button $clickedButton = null;
     public function __construct(string $title, string $content = "")
     {
-        parent::__construct("form");
+        parent::__construct(Form::SIMPLE_TYPE);
 
         $this->data["title"] = $title;
         $this->data["content"] = $content;
@@ -36,7 +36,7 @@ class SimpleForm extends Form
     public function addButton(Button $button)
     {
         $this->buttons[] = $button;
-        $this->data["buttons"][] = ["text" => $button->text];
+        $this->data["buttons"][] = $button->serialize();
 
         return $this;
     }

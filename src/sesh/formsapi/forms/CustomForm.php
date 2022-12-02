@@ -5,6 +5,8 @@ namespace sesh\formsapi\forms;
 use Error;
 use sesh\formsapi\elements\Dropdown;
 use sesh\formsapi\elements\Input;
+use sesh\formsapi\elements\Slider;
+use sesh\formsapi\elements\StepSlider;
 use sesh\formsapi\elements\Toggle;
 
 class CustomForm extends Form
@@ -13,7 +15,7 @@ class CustomForm extends Form
 
     public function __construct(string $title)
     {
-        parent::__construct("custom_form");
+        parent::__construct(Form::CUSTOM_TYPE);
 
         $this->data["title"] = $title;
         $this->data["content"] = [];
@@ -30,6 +32,16 @@ class CustomForm extends Form
     }
 
     public function getToggle(int $index): Toggle
+    {
+        return $this->getElement($index);
+    }
+
+    public function getSlider(int $index): Slider
+    {
+        return $this->getElement($index);
+    }
+
+    public function getStepSlider(int $index): StepSlider
     {
         return $this->getElement($index);
     }
@@ -72,6 +84,20 @@ class CustomForm extends Form
     {
         $this->data["content"][] = $toggle->serialize();
         $this->elements[] = $toggle;
+        return $this;
+    }
+
+    public function addSlider(Slider $slider)
+    {
+        $this->data["content"][] = $slider->serialize();
+        $this->elements[] = $slider;
+        return $this;
+    }
+
+    public function addStepSlider(StepSlider $slider)
+    {
+        $this->data["content"][] = $slider->serialize();
+        $this->elements[] = $slider;
         return $this;
     }
 

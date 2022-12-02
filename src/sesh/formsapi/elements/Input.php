@@ -27,9 +27,9 @@ class Input
     {
         $a = ["type" => "input", "text" => $this->text];
 
-        if ($this->defaultText != null)
+        if ($this->defaultText !== null)
             $a["default"] = $this->defaultText;
-        if ($this->placeholder != null)
+        if ($this->placeholder !== null)
             $a["placeholder"] = $this->placeholder;
 
         return $a;

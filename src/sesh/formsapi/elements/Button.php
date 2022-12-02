@@ -20,9 +20,9 @@ class Button
      * @param string $text
      * @param Closure(Player $player, Form $response) $callback
      */
-    public function __construct(public string $text, Closure $callback = null)
+    public function __construct(public string $text, Closure $callback = null, private ? Image $img = null)
     {
-        if ($callback != null)
+        if ($callback !== null)
             $this->callback = $callback;
     }
 
@@ -42,6 +42,25 @@ class Button
         $this->callback = $callback;
     }
 
+
+    public function setImage(Image $img)
+    {
+        $this->img = $img;
+    }
+
+    public function getImage()
+    {
+        return $this->img;
+    }
+
+    public function serialize()
+    {
+        $d = ["text" => $this->text];
+        if ($this->getImage())
+            $d["image"] = $this->getImage()->serialize();
+
+        return $d;
+    }
 
 
 }

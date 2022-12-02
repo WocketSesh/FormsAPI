@@ -13,7 +13,7 @@ class ModalForm extends Form
 
     public function __construct(string $title, string $content, Button $button1, Button $button2)
     {
-        parent::__construct("modal");
+        parent::__construct(Form::MODAL_TYPE);
 
         $this->addButton($button1, 1);
         $this->addButton($button2, 2);
